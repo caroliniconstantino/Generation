@@ -1,6 +1,8 @@
+package operadores_logicos;
+
 import java.util.Scanner;
 
-public class TodasAtividades {
+public class atividadesOperadores {
     //ATIVIDADE 01
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
