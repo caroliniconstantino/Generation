@@ -62,4 +62,5 @@ public class PostagemController {
 
         postagemRepository.deleteById(id);
     }
+
 }
