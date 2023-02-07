@@ -2,13 +2,13 @@ package com.blogpessoal.blogpessoal.controller;
 
 import com.blogpessoal.blogpessoal.model.Postagem;
 import com.blogpessoal.blogpessoal.repository.PostagemRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,10 +46,12 @@ public class PostagemController {
 
     @PutMapping
     public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem){
-        return postagemRepository.findById(postagem.getId())
-                .map(resposta -> ResponseEntity.status(HttpStatus.OK)
-                        .body(postagemRepository.save(postagem)))
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        if(postagemRepository.existsById(postagem.getId())){
+            if(postagemRepository.existsById(postagem.getTema().getId()))
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(postagemRepository.save(postagem));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

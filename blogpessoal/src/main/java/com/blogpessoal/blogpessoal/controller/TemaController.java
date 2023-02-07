@@ -2,15 +2,14 @@ package com.blogpessoal.blogpessoal.controller;
 
 import com.blogpessoal.blogpessoal.model.Tema;
 import com.blogpessoal.blogpessoal.repository.TemaRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.swing.text.html.parser.Entity;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,13 +44,28 @@ public class TemaController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(temaRepository.save(tema));
     }
+//NO CASO ABAIXO, O ID ESTÁ SENDO ENVIANDO POR PATH
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Tema> put(@Valid @RequestBody @PathVariable Tema tema) {
+//
+//            if(temaRepository.existsById(tema.getId()))
+//                return ResponseEntity.status(HttpStatus.OK)
+//                        .body(temaRepository.save(tema));
+//
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//    }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema){
-        return temaRepository.findById(tema.getId())
-                .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
-                        .body(temaRepository.save(tema)))
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    @PutMapping
+    public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema) {
+        //@Valid verifica se tds as exigências da tabela foram cumpridas (not null, size...)
+        // @RequestBody que a requesição requer que seja enviado um body
+        //temaRepository é o banco de dados
+
+        if(temaRepository.existsById(tema.getId()))//NESSE CASO, O ID ESTÁ SENDO ENVIADO DENTRO DO BODY
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(temaRepository.save(tema));
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
