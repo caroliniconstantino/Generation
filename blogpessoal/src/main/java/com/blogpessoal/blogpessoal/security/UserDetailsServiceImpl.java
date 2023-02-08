@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
+//-----------------Configura os acessos definindo quais rotas precisam do token e quais ñ---------------------
     @Autowired
     private UsuarioRepository usuarioRepository;
 

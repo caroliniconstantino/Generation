@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class BasicSecurityConfig {
-
+//-----------------Configura os acessos definindo quais rotas precisam do token e quais ñ -------------------
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

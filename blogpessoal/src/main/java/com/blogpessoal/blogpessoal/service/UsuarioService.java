@@ -57,7 +57,7 @@ public class UsuarioService {
         if (usuario.isPresent()) {
 
             if (compararSenhas(usuarioLogin.get().getSenha(), usuario.get().getSenha())) {
-
+//utiliza-se usuarioLogin p pegar oq o usuario está digitando no login e usuario para pegar a info do banco
                 usuarioLogin.get().setId(usuario.get().getId());
                 usuarioLogin.get().setNome(usuario.get().getNome());
                 usuarioLogin.get().setFoto(usuario.get().getFoto());
@@ -89,10 +89,11 @@ public class UsuarioService {
 
     }
 
+    //------------------------------GERA O TOKEN------------------------------
     private String gerarBasicToken(String usuario, String senha) {
 
         String token = usuario + ":" + senha;
-        byte[] tokenBase64 = Base64.encodeBase64(token.getBytes(Charset.forName("US-ASCII")));
+        byte[] tokenBase64 = Base64.encodeBase64(token.getBytes(Charset.forName("US-ASCII")));//modelo de criptografia
         return "Basic " + new String(tokenBase64);
 
     }

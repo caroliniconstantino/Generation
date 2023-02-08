@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsImpl implements UserDetails {
-
+//-------------------------Verifica se usuario e senha estão presentes no banco de dados------------------------------
     private static final long serialVersionUID =1L;
 
     private String userName;
@@ -21,7 +21,7 @@ public class UserDetailsImpl implements UserDetails {
         this.password = user.getSenha();
     }
 
-    public UserDetailsImpl (){ }
+    public UserDetailsImpl(){ }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
