@@ -1,6 +1,5 @@
 package com.blogpessoal.blogpessoal.controller;
 
-import com.blogpessoal.blogpessoal.model.Tema;
 import com.blogpessoal.blogpessoal.model.Usuario;
 import com.blogpessoal.blogpessoal.model.UsuarioLogin;
 import com.blogpessoal.blogpessoal.repository.UsuarioRepository;
